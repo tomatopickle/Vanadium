@@ -53,7 +53,7 @@ export default function Page({ data }: PageProps) {
                       srcset=""
                     />
                     <div class="block">
-                      <h2 class="font-semibold">
+                      <h2 class="font-semibold whitespace-nowrap">
                         {data.author.author}
                       </h2>
                       <small class="opacity-70 truncate">
