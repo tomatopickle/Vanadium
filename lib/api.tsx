@@ -23,6 +23,11 @@ class Api {
     const data = res.json();
     return data;
   }
+  async searchVideos(q:string) {
+    const res = await fetch(`${this.instanceUrl}/search/?q=${q}`);
+    const data = res.json();
+    return data;
+  }
 }
 
 export default Api;
