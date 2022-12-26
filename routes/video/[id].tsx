@@ -31,7 +31,7 @@ export default function Page({ data }: PageProps) {
           <button class={ui.btnPrimary}>Log in</button>
         </Header>
         <Head>
-          <title>{data.video.title} | Vanadium</title>
+          <title>{!data.video.error ? data.video.title : "Error"} | Vanadium</title>
         </Head>
 
         <div class="p-3">
@@ -96,9 +96,12 @@ export default function Page({ data }: PageProps) {
             )
             : (
               <div>
-                <h1 class="text-2xl p-10 font-bold text-center">
-                  Video not found
+                <h1 class="text-2xl p-10 pb-0 font-bold text-center">
+                  Error
                 </h1>
+                <h2 class="text-lg p-10 py-1  text-center">
+                  {data.video.error}
+                </h2>
                 <a href="../">
                   <button class={ui.btnPrimary + " block m-auto"}>
                     Go Home
