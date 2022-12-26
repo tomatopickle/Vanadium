@@ -8,8 +8,9 @@ export default function videoCard(video: Video) {
       <div class="max-w-sm dark:(hover:bg-gray-700 active:bg-gray-600) transition-all  hover:bg-gray-100 active:bg-gray-200 p-2 rounded-lg">
         <div class="relative">
           <img
-            class="rounded-lg max-h-32 w-full object-cover"
-            src={video.videoThumbnails[0].url}
+            class="rounded-lg h-32 w-full object-cover"
+            loading="lazy"
+            src={video.videoThumbnails[4].url}
             alt="Video Thumbnail"
           />
           <div class="px-2 py-1 bg-black bg-opacity-60 w-min rounded-lg text-sm absolute bottom-1 right-2">

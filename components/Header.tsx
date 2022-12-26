@@ -10,7 +10,7 @@ export default function Header(
         <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
           <a href="https://vanadium.deno.dev/" class="flex items-center">
             <img
-              src="./logo.png"
+              src="https://vanadium.deno.dev/logo.png"
               class="mr-3 h-6 sm:h-9"
               alt="Vanadium Logo"
             />

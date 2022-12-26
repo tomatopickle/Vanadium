@@ -10,6 +10,7 @@ import formatNumber from "../../lib/formatNumber.ts";
 import IconThumbUp from "https://deno.land/x/tabler_icons_tsx@0.0.2/tsx/thumb-up.tsx";
 import IconThumbDown from "https://deno.land/x/tabler_icons_tsx@0.0.2/tsx/thumb-down.tsx";
 import Comments from "../../islands/Comments.tsx";
+import videoCard from "../../components/VideoCard.tsx";
 
 export const handler: Handlers = {
   async GET(_, ctx) {
@@ -26,80 +27,83 @@ export const handler: Handlers = {
 export default function Page({ data }: PageProps) {
   return (
     <>
-      <Header>
-        <button class={ui.btnPrimary}>Log in</button>
-      </Header>
-
-      <Body class="p-3">
+      <Body class="p-0">
+        <Header>
+          <button class={ui.btnPrimary}>Log in</button>
+        </Header>
         <Head>
-          <title>Vanadium</title>
+          <title>{data.video.title} | Vanadium</title>
         </Head>
 
-        {!data.error
-          ? (
-            <p class="my-6">
-              <div class="flex h-full">
-                <div class="w-3/4 h-4/5 h-screen">
-                  <video
-                    src={`https://invidious.baczek.me/latest_version?id=${data.video.videoId}&itag=22&local=true`}
-                    controls
-                    class="h-3/5 w-full"
-                  >
-                  </video>
-                  <h1 class="text-xl font-bold my-3">{data.video.title}</h1>
-                  <div class="flex my-3 gap-2 align-middle">
-                    <img
-                      class="rounded-full "
-                      src={data.author.authorThumbnails[1].url}
-                      alt="Channel Photo"
-                      srcset=""
-                    />
-                    <div class="block">
-                      <h2 class="font-semibold whitespace-nowrap">
-                        {data.author.author}
-                      </h2>
-                      <small class="opacity-70 truncate">
-                        {formatNumber(data.author.subCount)} subscribers
-                      </small>
+        <div class="p-3">
+          {!data.error
+            ? (
+              <p class="my-6">
+                <div class="flex h-full">
+                  <div class="w-3/4 h-4/5 h-screen">
+                    <video
+                      src={`https://invidious.baczek.me/latest_version?id=${data.video.videoId}&itag=22&local=true`}
+                      controls
+                      class="h-3/5 w-full"
+                    >
+                    </video>
+                    <h1 class="text-xl font-bold my-3">{data.video.title}</h1>
+                    <div class="flex my-3 gap-2 align-middle">
+                      <img
+                        class="rounded-full object-cover w-1/12"
+                        src={data.author.authorThumbnails[0].url}
+                        alt="Channel Photo"
+                        srcset=""
+                      />
+                      <div class="block">
+                        <h2 class="font-semibold whitespace-nowrap">
+                          {data.author.author}
+                        </h2>
+                        <small class="opacity-70 truncate">
+                          {formatNumber(data.author.subCount)} subscribers
+                        </small>
+                      </div>
+                      <div class="w-full"></div>
+                      <div class="dark:( bg-gray-700) rounded-full pl-3 pr-3 flex">
+                        <button class="truncate border-r border-gray-600 pr-2 font-medium ">
+                          <div class="flex">
+                            <IconThumbUp class="pr-1" />{" "}
+                            <div>{formatNumber(data.video.likeCount)}</div>
+                          </div>
+                        </button>
+                        <button class="truncate pl-2 font-medium">
+                          <div class="flex">
+                            <IconThumbDown />
+                          </div>
+                        </button>
+                      </div>
                     </div>
-                    <div class="w-full"></div>
-                    <div class="dark:( bg-gray-700) rounded-full pl-3 pr-3 flex">
-                      <button class="truncate border-r border-gray-600 pr-2 font-medium ">
-                        <div class="flex">
-                          <IconThumbUp class="pr-1" />{" "}
-                          <div>{formatNumber(data.video.likeCount)}</div>
-                        </div>
-                      </button>
-                      <button class="truncate pl-2 font-medium">
-                        <div class="flex">
-                          <IconThumbDown />
-                        </div>
-                      </button>
+                    <br />
+                    <div class="bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-700 p-3 dark:border-gray-700">
+                      <p>{data.video.description}</p>
                     </div>
+                    <br />
+                    <h2 class="text-lg font-semibold">Comments</h2>
+                    <Comments comments={data.comments} />
+                    <br />
                   </div>
-                  <br />
-                  <div class="bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-700 p-3 dark:border-gray-700">
-                    <p>{data.video.description}</p>
-                  </div>
-                  <br />
-                  <h2 class="text-lg font-semibold">Comments</h2>
-                  <Comments comments={data.comments} />
-                  <br />
+                  <div class="w-2/5"></div>
                 </div>
-                <div class="w-2/5"></div>
+              </p>
+            )
+            : (
+              <div>
+                <h1 class="text-2xl p-10 font-bold text-center">
+                  Video not found
+                </h1>
+                <a href="../">
+                  <button class={ui.btnPrimary + " block m-auto"}>
+                    Go Home
+                  </button>
+                </a>
               </div>
-            </p>
-          )
-          : (
-            <div>
-              <h1 class="text-2xl p-10 font-bold text-center">
-                Video not found
-              </h1>
-              <a href="../">
-                <button class={ui.btnPrimary + " block m-auto"}>Go Home</button>
-              </a>
-            </div>
-          )}
+            )}
+        </div>
       </Body>
     </>
   );
