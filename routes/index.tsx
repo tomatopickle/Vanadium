@@ -10,7 +10,7 @@ import SearchBar from "../components/SearchBar.tsx";
 
 export const handler: Handlers<Array<Video>> = {
   async GET(_, ctx) {
-    const api = new Api("https://yt.funami.tech/api/v1");
+    const api = new Api("https://invidious.baczek.me/api/v1");
     const data = await api.getPopular();
     return ctx.render(data);
   },
@@ -30,7 +30,7 @@ export default function Page({ data }: PageProps<Array<Video> | null>) {
         </Head>
 
         <p class="my-6">
-          <SearchBar />
+          <SearchBar q="" />
           <br />
           <h1 class="text-2xl font-semibold">Trending</h1>
           <br />

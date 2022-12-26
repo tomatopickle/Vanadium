@@ -13,7 +13,7 @@ export default function videoCard(video: Video) {
               <img
                 class="rounded-lg object-cover h-28 w-full"
                 src={video.videoThumbnails
-                  ? video.videoThumbnails[0].url
+                  ? video.videoThumbnails[2].url
                   : "../noVid.jpg"}
                 alt="Video Thumbnail"
               />

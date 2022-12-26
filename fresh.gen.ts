@@ -9,10 +9,11 @@ import * as $2 from "./routes/api/joke.ts";
 import * as $3 from "./routes/index.tsx";
 import * as $4 from "./routes/search.tsx";
 import * as $5 from "./routes/video/[id].tsx";
-import * as $$0 from "./islands/Counter.tsx";
-import * as $$1 from "./islands/VideoUI.tsx";
-import * as $$2 from "./islands/Videos.tsx";
-import * as $$3 from "./islands/VideosList.tsx";
+import * as $$0 from "./islands/Comments.tsx";
+import * as $$1 from "./islands/Counter.tsx";
+import * as $$2 from "./islands/VideoUI.tsx";
+import * as $$3 from "./islands/Videos.tsx";
+import * as $$4 from "./islands/VideosList.tsx";
 
 const manifest = {
   routes: {
@@ -24,10 +25,11 @@ const manifest = {
     "./routes/video/[id].tsx": $5,
   },
   islands: {
-    "./islands/Counter.tsx": $$0,
-    "./islands/VideoUI.tsx": $$1,
-    "./islands/Videos.tsx": $$2,
-    "./islands/VideosList.tsx": $$3,
+    "./islands/Comments.tsx": $$0,
+    "./islands/Counter.tsx": $$1,
+    "./islands/VideoUI.tsx": $$2,
+    "./islands/Videos.tsx": $$3,
+    "./islands/VideosList.tsx": $$4,
   },
   baseUrl: import.meta.url,
   config,

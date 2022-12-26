@@ -1,7 +1,11 @@
 import ui from "../ui/index.tsx";
 import IconSearch from "https://deno.land/x/tabler_icons_tsx@0.0.2/tsx/search.tsx";
 
-export default function SearchBar() {
+interface Props {
+  q: string;
+}
+
+export default function SearchBar(props: Props) {
   return (
     <form action="./search" type="multipart/form-data">
       <label
@@ -21,6 +25,7 @@ export default function SearchBar() {
           class={ui.input.textInput}
           placeholder="Search Videos..."
           required
+          value={props.q}
         />
         <button
           type="submit"

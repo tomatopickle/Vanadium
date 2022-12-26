@@ -9,15 +9,17 @@ import ui from "../../ui/index.tsx";
 import formatNumber from "../../lib/formatNumber.ts";
 import IconThumbUp from "https://deno.land/x/tabler_icons_tsx@0.0.2/tsx/thumb-up.tsx";
 import IconThumbDown from "https://deno.land/x/tabler_icons_tsx@0.0.2/tsx/thumb-down.tsx";
+import Comments from "../../islands/Comments.tsx";
 
 export const handler: Handlers = {
   async GET(_, ctx) {
     const videoId = ctx.params.id;
-    const api = new Api("https://yt.funami.tech/api/v1");
+    const api = new Api("https://invidious.baczek.me/api/v1");
     const video = await api.getVideo(videoId);
     const author = await api.getAuthor(video.authorId);
-    console.log(video);
-    return ctx.render({ video, author });
+    const comments = await api.getVideoComments(videoId);
+    console.log(comments);
+    return ctx.render({ video, author, comments: comments.comments });
   },
 };
 
@@ -39,7 +41,7 @@ export default function Page({ data }: PageProps) {
               <div class="flex h-full">
                 <div class="w-3/4 h-4/5 h-screen">
                   <video
-                    src={`https://vid.puffyan.us/latest_version?id=${data.video.videoId}&itag=22`}
+                    src={`https://invidious.baczek.me/latest_version?id=${data.video.videoId}&itag=22&local=true`}
                     controls
                     class="h-3/5 w-full"
                   >
@@ -75,8 +77,16 @@ export default function Page({ data }: PageProps) {
                       </button>
                     </div>
                   </div>
+                  <br />
+                  <div class="bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-700 p-3 dark:border-gray-700">
+                    <p>{data.video.description}</p>
+                  </div>
+                  <br />
+                  <h2 class="text-lg font-semibold">Comments</h2>
+                  <Comments comments={data.comments} />
+                  <br />
                 </div>
-                <div class="w-1/4"></div>
+                <div class="w-2/5"></div>
               </div>
             </p>
           )

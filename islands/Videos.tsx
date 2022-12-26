@@ -87,7 +87,7 @@ export default class Videos extends Component<
     if (this.props == null) {
       return;
     }
-    const api = new Api("https://yt.funami.tech/api/v1");
+    const api = new Api("https://invidious.baczek.me/api/v1");
     const data = this.props.data;
     const el = data.map((e: Video) => {
       return videoCard(e);

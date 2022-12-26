@@ -13,7 +13,7 @@ export const handler: Handlers = {
   async GET(_, ctx) {
     const authorId = ctx.params.authorId;
     const resp = await fetch(
-      `https://yt.funami.tech/api/v1/channels/${authorId}`,
+      `https://invidious.baczek.me/api/v1/channels/${authorId}`,
     );
     if (resp.status === 404) {
       return ctx.render(null);

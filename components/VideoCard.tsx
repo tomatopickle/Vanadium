@@ -8,7 +8,7 @@ export default function videoCard(video: Video) {
       <div class="max-w-sm dark:(hover:bg-gray-700 active:bg-gray-600) transition-all  hover:bg-gray-100 active:bg-gray-200 p-2 rounded-lg">
         <div class="relative">
           <img
-            class="rounded-lg max-h-32 w-full"
+            class="rounded-lg max-h-32 w-full object-cover"
             src={video.videoThumbnails[0].url}
             alt="Video Thumbnail"
           />
@@ -18,7 +18,13 @@ export default function videoCard(video: Video) {
         </div>
         <div class="py-5 pt-3">
           <div class="flex">
-            <small class="opacity-60">{formatNumber(video.viewCount)} views</small>
+            <small class="opacity-60 whitespace-nowrap">
+              {formatNumber(video.viewCount)} views
+            </small>
+            <div class="w-full"></div>
+            <small class="opacity-60 whitespace-nowrap">
+              {video.publishedText}
+            </small>
           </div>
           <h5 class="text-base font-semibold tracking-tight ">
             {video.title}
@@ -47,6 +53,3 @@ function fancyTimeFormat(duration: number) {
   ret += "" + secs;
   return ret;
 }
-
-
-

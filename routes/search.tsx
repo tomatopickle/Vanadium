@@ -14,8 +14,8 @@ interface Data {
 export const handler: Handlers<Data> = {
   async GET(req, ctx) {
     const url = new URL(req.url);
-    const q = url.searchParams.get("q") || "";
-    const api = new Api("https://yt.funami.tech/api/v1");
+    const q: string = url.searchParams.get("q") || "";
+    const api = new Api("https://invidious.baczek.me/api/v1");
     const results = await api.searchVideos(q);
     return ctx.render({ results, q });
   },
@@ -25,15 +25,17 @@ export default function Page({ data }: PageProps<Data>) {
   const { results, q } = data;
   return (
     <>
-    <Header />
+      <Header />
 
-    <Body>
+      <Body>
+        <Head>
+          <title>{q} | Vanadium</title>
+        </Head>
+        <SearchBar q={q} />
+        <br />
 
-      <SearchBar />
-      <br />
-
-      <VideosList data={results == null ? [] : results} />
-    </Body>
+        <VideosList data={results == null ? [] : results} />
+      </Body>
     </>
   );
 }
