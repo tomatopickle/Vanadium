@@ -19,7 +19,6 @@ export const handler: Handlers = {
     const video = await api.getVideo(videoId);
     const author = await api.getAuthor(video.authorId);
     const comments = await api.getVideoComments(videoId);
-    console.log(comments);
     return ctx.render({ video, author, comments: comments.comments });
   },
 };
@@ -36,7 +35,7 @@ export default function Page({ data }: PageProps) {
         </Head>
 
         <div class="p-3">
-          {!data.error
+          {!data.video.error
             ? (
               <p class="my-6">
                 <div class="flex h-full">
@@ -49,12 +48,16 @@ export default function Page({ data }: PageProps) {
                     </video>
                     <h1 class="text-xl font-bold my-3">{data.video.title}</h1>
                     <div class="flex my-3 gap-2 align-middle">
-                      <img
-                        class="rounded-full object-cover w-1/12"
-                        src={data.author.authorThumbnails[0].url}
-                        alt="Channel Photo"
-                        srcset=""
-                      />
+                      {data.author.authorThumbnails
+                        ? (
+                          <img
+                            class="rounded-full object-cover w-1/12"
+                            src={data.author.authorThumbnails[0].url}
+                            alt="Channel Photo"
+                            srcset=""
+                          />
+                        )
+                        : <div></div>}
                       <div class="block">
                         <h2 class="font-semibold whitespace-nowrap">
                           {data.author.author}
