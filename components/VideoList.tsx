@@ -2,16 +2,18 @@ import "../ui/index.tsx";
 import ui from "../ui/index.tsx";
 import formatNumber from "../lib/formatNumber.ts";
 
-export default function videoCard(video: Video) {
+export default function videoCard(video: Video, inRecos) {
   console.log(video.videoThumbnails);
   return (
     video.videoId
       ? (
         <a href={`/video/${video.videoId}`} key={video.videoId}>
           <div class="w-full dark:(hover:bg-gray-700 active:bg-gray-600) flex transition-all  hover:bg-gray-100 active:bg-gray-200 p-2 rounded-lg">
-            <div class="relative mr-3 w-1/5">
+            <div class="relative mr-3 w-1/5 min-w-[12vw]">
               <img
-                class="rounded-lg object-cover h-28 w-full"
+                class={"rounded-lg object-cover h-28 w-full" + inRecos &&
+                  "absolute top-1/2 object-fill "}
+                style={inRecos && "transform: translateY(-50%);"}
                 src={video.videoThumbnails
                   ? video.videoThumbnails[2].url
                   : "../noVid.jpg"}
@@ -22,7 +24,10 @@ export default function videoCard(video: Video) {
               </div>
             </div>
             <div class="py-5 pt-3 flex-col">
-              <h5 class="text-base font-semibold tracking-tight ">
+              <h5
+                class={"text-base font-semibold tracking-tight " + inRecos &&
+                  "text-sm"}
+              >
                 {video.title}
               </h5>
               <div class="flex mt-0.5 block">

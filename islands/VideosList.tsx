@@ -75,7 +75,7 @@ let dummyData: Array<any> = [{
 }];
 
 export default class Videos extends Component<
-  { data: Array<Video> },
+  { data: Array<Video>; inRecos: booolean },
   { videoCards: preact.JSX.Element[] }
 > {
   constructor() {
@@ -90,7 +90,7 @@ export default class Videos extends Component<
     const api = new Api("https://invidious.baczek.me/api/v1");
     const data = this.props.data;
     const el = data.map((e: Video) => {
-      return VideoList(e);
+      return VideoList(e,true);
     });
     this.setState(
       { videoCards: el },

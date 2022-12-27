@@ -3,14 +3,14 @@ import { Handlers, PageProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
 import Body from "../../components/Body.tsx";
 import Header from "../../components/Header.tsx";
-import Videos from "../../islands/Videos.tsx";
+import VideosList from "../../islands/VideosList.tsx";
+
 import Api from "../../lib/api.tsx";
 import ui from "../../ui/index.tsx";
 import formatNumber from "../../lib/formatNumber.ts";
 import IconThumbUp from "https://deno.land/x/tabler_icons_tsx@0.0.2/tsx/thumb-up.tsx";
 import IconThumbDown from "https://deno.land/x/tabler_icons_tsx@0.0.2/tsx/thumb-down.tsx";
 import Comments from "../../islands/Comments.tsx";
-import videoCard from "../../components/VideoCard.tsx";
 import Linkify from "https://esm.sh/react-linkify";
 
 export const handler: Handlers = {
@@ -19,8 +19,9 @@ export const handler: Handlers = {
     const api = new Api("https://invidious.baczek.me/api/v1");
     const video = await api.getVideo(videoId);
     const author = await api.getAuthor(video.authorId);
+    const recos = await api.searchVideos(video.title);
     const comments = await api.getVideoComments(videoId);
-    return ctx.render({ video, author, comments: comments.comments });
+    return ctx.render({ video, author, comments: comments.comments, recos });
   },
 };
 
@@ -41,8 +42,8 @@ export default function Page({ data }: PageProps) {
           {!data.video.error
             ? (
               <p class="my-6">
-                <div class="flex h-full">
-                  <div class="w-3/4 h-4/5 h-screen">
+                <div class="flex h-full gap-1">
+                  <div class="w-2/3 h-4/5 h-screen">
                     <video
                       src={`https://invidious.baczek.me/latest_version?id=${data.video.videoId}&itag=22&local=true`}
                       controls
@@ -86,16 +87,21 @@ export default function Page({ data }: PageProps) {
                     </div>
                     <br />
                     <div class="bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-700 p-3 dark:border-gray-700">
-                      <p>
+                      <p class="break-all">
                         <Linkify>{data.video.description}</Linkify>
                       </p>
                     </div>
                     <br />
                     <h2 class="text-lg font-semibold">Comments</h2>
-                    <Comments comments={data.comments} videoId={data.video.videoId} />
+                    <Comments
+                      comments={data.comments}
+                      videoId={data.video.videoId}
+                    />
                     <br />
                   </div>
-                  <div class="w-2/5"></div>
+                  <div class="w-2/6">
+                    <VideosList data={data.recos} inRecos={true} />
+                  </div>
                 </div>
               </p>
             )
