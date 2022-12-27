@@ -11,6 +11,7 @@ import IconThumbUp from "https://deno.land/x/tabler_icons_tsx@0.0.2/tsx/thumb-up
 import IconThumbDown from "https://deno.land/x/tabler_icons_tsx@0.0.2/tsx/thumb-down.tsx";
 import Comments from "../../islands/Comments.tsx";
 import videoCard from "../../components/VideoCard.tsx";
+import Linkify from "https://esm.sh/react-linkify";
 
 export const handler: Handlers = {
   async GET(_, ctx) {
@@ -31,7 +32,9 @@ export default function Page({ data }: PageProps) {
           <button class={ui.btnPrimary}>Log in</button>
         </Header>
         <Head>
-          <title>{!data.video.error ? data.video.title : "Error"} | Vanadium</title>
+          <title>
+            {!data.video.error ? data.video.title : "Error"} | Vanadium
+          </title>
         </Head>
 
         <div class="p-3">
@@ -51,7 +54,7 @@ export default function Page({ data }: PageProps) {
                       {data.author.authorThumbnails
                         ? (
                           <img
-                            class="rounded-full object-cover w-24"
+                            class="rounded-full object-cover w-20"
                             src={data.author.authorThumbnails[0].url}
                             alt="Channel Photo"
                             srcset=""
@@ -83,11 +86,13 @@ export default function Page({ data }: PageProps) {
                     </div>
                     <br />
                     <div class="bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-700 p-3 dark:border-gray-700">
-                      <p>{data.video.description}</p>
+                      <p>
+                        <Linkify>{data.video.description}</Linkify>
+                      </p>
                     </div>
                     <br />
                     <h2 class="text-lg font-semibold">Comments</h2>
-                    <Comments comments={data.comments} />
+                    <Comments comments={data.comments} videoId={data.video.videoId} />
                     <br />
                   </div>
                   <div class="w-2/5"></div>
