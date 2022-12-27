@@ -54,8 +54,8 @@ export default function Page({ data }: PageProps) {
                       {data.author.authorThumbnails
                         ? (
                           <img
-                            class="rounded-full object-cover w-20"
-                            src={data.author.authorThumbnails[0].url}
+                            class="rounded-full object-cover w-14"
+                            src={data.author.authorThumbnails.at(-1).url}
                             alt="Channel Photo"
                             srcset=""
                           />

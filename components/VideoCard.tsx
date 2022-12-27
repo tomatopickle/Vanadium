@@ -14,7 +14,9 @@ export default function videoCard(video: Video) {
             alt="Video Thumbnail"
           />
           <div class="px-2 py-1 bg-black bg-opacity-60 w-min rounded-lg text-sm absolute bottom-1 right-2">
-            {fancyTimeFormat(Number(video.lengthSeconds))}
+            {Number(video.lengthSeconds) == 0
+              ? "LIVE"
+              : fancyTimeFormat(Number(video.lengthSeconds))}
           </div>
         </div>
         <div class="py-5 pt-3">

@@ -5,13 +5,14 @@ import { apply } from 'twind'
 export default {
   selfURL: import.meta.url,
   preflight: {
-    a: apply`text-blue-500 text-no-underline active:(opacity-80)`,
+    'p a': apply`text-blue-500 text-no-underline active:(opacity-80)`,
   },
   theme: {
     colors: {
       // Build your palette here
       gray: colors.coolGray,
-      blue: colors.purple,
+      black: colors.black,
+      blue: colors.blue,
       white: colors.white,
     },
   },
