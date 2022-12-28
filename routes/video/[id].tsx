@@ -20,9 +20,14 @@ export const handler: Handlers = {
     const video = await api.getVideo(videoId);
     const author = await api.getAuthor(video.authorId);
     const recosData = await api.searchVideos(video.title);
-    console.log(recosData)
     const comments = await api.getVideoComments(videoId);
-    return ctx.render({ video, author, comments: comments.comments, recosData });
+    console.log(video);
+    return ctx.render({
+      video,
+      author,
+      comments: comments.comments,
+      recosData,
+    });
   },
 };
 
@@ -34,6 +39,19 @@ export default function Page({ data }: PageProps) {
           <button class={ui.btnPrimary}>Log in</button>
         </Header>
         <Head>
+          <script src="https://vjs.zencdn.net/7.20.3/video.min.js"></script>
+          <link
+            href="https://vjs.zencdn.net/7.20.3/video-js.css"
+            rel="stylesheet"
+          />
+          <link
+            href="https://unpkg.com/@silvermine/videojs-quality-selector/dist/css/quality-selector.css"
+            rel="stylesheet"
+          />
+          <script src="./path/to/video.min.js"></script>
+          <script src="https://unpkg.com/@silvermine/videojs-quality-selector/dist/js/silvermine-videojs-quality-selector.min.js">
+          </script>
+
           <title>
             {!data.video.error ? data.video.title : "Error"} | Vanadium
           </title>
@@ -46,12 +64,21 @@ export default function Page({ data }: PageProps) {
                 <div class="flex h-full gap-1">
                   <div class="w-2/3 h-4/5 h-screen">
                     <video
-                      // src={`https://invidious.baczek.me/latest_version?id=${data.video.videoId}&itag=22&local=true`}
+                      id="video"
+                      preload="auto"
+                      data-setup="{}"
                       controls
-                      class="h-3/5 w-full"
+                      class="video-js  vjs-big-play-centered h-3/5 w-full"
                     >
-                      <source src={`https://invidious.baczek.me/latest_version?id=${data.video.videoId}&itag=18&local=true`} type="" />
-                      <source src={`https://invidious.baczek.me/latest_version?id=${data.video.videoId}&itag=22&local=true`} type="" />
+                      {data.video.formatStreams.map((source: any) => {
+                        return (
+                          <source
+                            label={source.qualityLabel}
+                            src={source.url}
+                            type={source.type}
+                          />
+                        );
+                      })}
                     </video>
                     <h1 class="text-xl font-bold my-3">{data.video.title}</h1>
                     <div class="flex my-3 gap-2 align-middle">
@@ -103,11 +130,24 @@ export default function Page({ data }: PageProps) {
                     <br />
                   </div>
                   <div class="w-2/6">
-                    <div class='w-full'>
-                      {data.recosData.map((reco:any) =>RecoTile(reco) )}
+                    <div class="w-full">
+                      {data.recosData.map((reco: any) => RecoTile(reco))}
                     </div>
                   </div>
                 </div>
+                <script>
+                  {`videojs('video', {}, function() {
+   var player = this;
+
+   player.controlBar.addChild('QualitySelector');
+});`}
+                </script>
+                <style>{`
+                  .video-js .vjs-control:focus:before, .video-js .vjs-control:hover:before, .video-js .vjs-control:focus{
+                    text-shadow:none;
+                    opacity:0.7;
+                  }
+                `}</style>
               </p>
             )
             : (

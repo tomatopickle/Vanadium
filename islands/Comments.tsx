@@ -36,7 +36,6 @@ export default class Comments
   render() {
     const comments = this.props.comments;
     const els: Array<JSX.Element> = [];
-    console.log(comments);
     comments.forEach((comment) => {
       els.push(
         <div>
