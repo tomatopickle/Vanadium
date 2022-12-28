@@ -46,10 +46,12 @@ export default function Page({ data }: PageProps) {
                 <div class="flex h-full gap-1">
                   <div class="w-2/3 h-4/5 h-screen">
                     <video
-                      src={`https://invidious.baczek.me/latest_version?id=${data.video.videoId}&itag=22&local=true`}
+                      // src={`https://invidious.baczek.me/latest_version?id=${data.video.videoId}&itag=22&local=true`}
                       controls
                       class="h-3/5 w-full"
                     >
+                      <source src={`https://invidious.baczek.me/latest_version?id=${data.video.videoId}&itag=18&local=true`} type="" />
+                      <source src={`https://invidious.baczek.me/latest_version?id=${data.video.videoId}&itag=22&local=true`} type="" />
                     </video>
                     <h1 class="text-xl font-bold my-3">{data.video.title}</h1>
                     <div class="flex my-3 gap-2 align-middle">
