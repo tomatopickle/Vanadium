@@ -20,10 +20,7 @@ export const handler: Handlers = {
     const video = await api.getVideo(videoId);
     const author = await api.getAuthor(video.authorId);
     const recosData = await api.searchVideos(video.title);
-    let recosEls: Array<any> = [];
-    // recosData.forEach((reco:Video) => {
-    //   recosEls.push(RecoTile(reco));
-    // });
+    console.log(recosData)
     const comments = await api.getVideoComments(videoId);
     return ctx.render({ video, author, comments: comments.comments, recosData });
   },

@@ -21,12 +21,17 @@ export default function videoCard(video: Video, inRecos) {
                 {fancyTimeFormat(Number(video.lengthSeconds))}
               </div>
             </div>
-            <div class="py-5 pt-3 flex-col">
-              <h5
-                class={"text-base font-semibold tracking-tight "}
+            <div class="py-5 pt-3 flex-col w-full">
+             <div class="flex whitespace-nowrap w-full">
+             <h5
+                class="text-base font-semibold tracking-tight w-3/4 whitespace-break-spaces"
               >
                 {video.title}
               </h5>
+                <small class='opacity-50 ml-auto'>
+                  {video.publishedText}
+                </small>
+             </div>
               <div class="flex mt-0.5 block">
                 <small class="opacity-60">
                   {formatNumber(video.viewCount)} views

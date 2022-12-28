@@ -3,7 +3,6 @@ import ui from "../ui/index.tsx";
 import formatNumber from "../lib/formatNumber.ts";
 
 export default function recoTile(video: Video) {
-  console.log(video.videoThumbnails);
   return (
     video.videoId
       ? (
