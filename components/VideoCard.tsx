@@ -4,7 +4,7 @@ import formatNumber from "../lib/formatNumber.ts";
 
 export default function videoCard(video: Video) {
   return (
-    <a href={`/video/${video.videoId}`} key={video.videoId}>
+    <a href={`/video/${video.videoId}`} key={video.videoId} class='focus-visible:(border-blue-500 border-1) rounded-lg'>
       <div class="max-w-sm dark:(hover:bg-gray-700 active:bg-gray-600) transition-all  hover:bg-gray-100 active:bg-gray-200 p-2 rounded-lg">
         <div class="relative">
           <img
