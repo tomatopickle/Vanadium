@@ -19,7 +19,8 @@ export const handler: Handlers = {
     const api = new Api("https://invidious.baczek.me/api/v1");
     const video = await api.getVideo(videoId);
     const author = await api.getAuthor(video.authorId);
-    const recosData = await api.searchVideos(video.title);
+    // const recosData = await api.searchVideos(video.title);
+    const recosData = video.recommendedVideos;
     const comments = await api.getVideoComments(videoId);
     console.log(video);
     return ctx.render({
@@ -48,7 +49,6 @@ export default function Page({ data }: PageProps) {
             href="https://unpkg.com/@silvermine/videojs-quality-selector/dist/css/quality-selector.css"
             rel="stylesheet"
           />
-          <script src="./path/to/video.min.js"></script>
           <script src="https://unpkg.com/@silvermine/videojs-quality-selector/dist/js/silvermine-videojs-quality-selector.min.js">
           </script>
 
@@ -79,6 +79,17 @@ export default function Page({ data }: PageProps) {
                           />
                         );
                       })}
+                      {/* {data.video.captions.map((source: any) => {
+                        return (
+                          <track
+                            kind="captions"
+                            src={`https://invidious.weblibre.org${source.url}`}
+                            srclang="en"
+                            label={source.label}
+                            default
+                          />
+                        );
+                      })} */}
                     </video>
                     <h1 class="text-xl font-bold my-3">{data.video.title}</h1>
                     <div class="flex my-3 gap-2 align-middle">
@@ -142,12 +153,14 @@ export default function Page({ data }: PageProps) {
    player.controlBar.addChild('QualitySelector');
 });`}
                 </script>
-                <style>{`
+                <style>
+                  {`
                   .video-js .vjs-control:focus:before, .video-js .vjs-control:hover:before, .video-js .vjs-control:focus{
                     text-shadow:none;
                     opacity:0.7;
                   }
-                `}</style>
+                `}
+                </style>
               </p>
             )
             : (
