@@ -3,7 +3,7 @@ import { Handlers, PageProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
 import Body from "../../components/Body.tsx";
 import Header from "../../components/Header.tsx";
-import VideosList from "../../islands/VideosList.tsx";
+import RecoTile from "../../components/RecoTile.tsx";
 
 import Api from "../../lib/api.tsx";
 import ui from "../../ui/index.tsx";
@@ -19,9 +19,13 @@ export const handler: Handlers = {
     const api = new Api("https://invidious.baczek.me/api/v1");
     const video = await api.getVideo(videoId);
     const author = await api.getAuthor(video.authorId);
-    const recos = await api.searchVideos(video.title);
+    const recosData = await api.searchVideos(video.title);
+    let recosEls: Array<any> = [];
+    // recosData.forEach((reco:Video) => {
+    //   recosEls.push(RecoTile(reco));
+    // });
     const comments = await api.getVideoComments(videoId);
-    return ctx.render({ video, author, comments: comments.comments, recos });
+    return ctx.render({ video, author, comments: comments.comments, recosData });
   },
 };
 
@@ -100,7 +104,9 @@ export default function Page({ data }: PageProps) {
                     <br />
                   </div>
                   <div class="w-2/6">
-                    <VideosList data={data.recos} inRecos={true} />
+                    <div class='w-full'>
+                      {data.recosData.map((reco:any) =>RecoTile(reco) )}
+                    </div>
                   </div>
                 </div>
               </p>

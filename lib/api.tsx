@@ -36,7 +36,7 @@ class Api {
     return data;
   }
   async searchVideos(q: string) {
-    const res = await fetch(`${this.instanceUrl}/search/?q=${q}`);
+    const res = await fetch(`${this.instanceUrl}/search/?q=${q}&hl=en-US&safe=true`);
     const data = res.json();
     return data;
   }

@@ -2,16 +2,16 @@ import "../ui/index.tsx";
 import ui from "../ui/index.tsx";
 import formatNumber from "../lib/formatNumber.ts";
 
-export default function videoCard(video: Video, inRecos) {
+export default function recoTile(video: Video) {
   console.log(video.videoThumbnails);
   return (
     video.videoId
       ? (
         <a href={`/video/${video.videoId}`} key={video.videoId}>
-          <div class="w-full dark:(hover:bg-gray-700 active:bg-gray-600) flex transition-all  hover:bg-gray-100 active:bg-gray-200 p-2 rounded-lg">
-            <div class="relative mr-3 w-1/5 min-w-[12vw]">
+          <div class="m-2 gap-2 w-full dark:(hover:bg-gray-700 active:bg-gray-600) flex transition-all  hover:bg-gray-100 active:bg-gray-200 p-2 rounded-lg">
+            <div class="w-2/6 relative">
               <img
-                class={"rounded-lg object-cover h-28 w-full"}
+              class="rounded-lg object-fill w-full h-full"
                 src={video.videoThumbnails
                   ? video.videoThumbnails[2].url
                   : "../noVid.jpg"}
@@ -21,15 +21,15 @@ export default function videoCard(video: Video, inRecos) {
                 {fancyTimeFormat(Number(video.lengthSeconds))}
               </div>
             </div>
-            <div class="py-5 pt-3 flex-col">
-              <h5
-                class={"text-base font-semibold tracking-tight "}
-              >
-                {video.title}
-              </h5>
-              <div class="flex mt-0.5 block">
-                <small class="opacity-60">
+            <div class="w-2/3">
+              <h3>{video.title}</h3>
+              <div class="flex mt-0.5 block whitespace-nowrap">
+                <small class='opacity-60'>
                   {formatNumber(video.viewCount)} views
+                </small>
+                <div class="w-full"></div>
+                <small class='opacity-50'>
+                  {video.publishedText}
                 </small>
               </div>
               <small class="opacity-90">{video.author}</small>
