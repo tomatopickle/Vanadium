@@ -70,6 +70,17 @@ export default function Page({ data }: PageProps) {
                       controls
                       class="video-js  vjs-big-play-centered h-3/5 w-full"
                     >
+                      {data.video.captions.map((source: any) => {
+                        return (
+                          <track
+                            kind="captions"
+                            src={`http://localhost:8000/api/cc?url=https://invidious.weblibre.org${source.url}`}
+                            srclang={source.language_code}
+                            label={source.label}
+                            default
+                          />
+                        );
+                      })}
                       {data.video.formatStreams.map((source: any) => {
                         return (
                           <source
@@ -79,17 +90,6 @@ export default function Page({ data }: PageProps) {
                           />
                         );
                       })}
-                      {/* {data.video.captions.map((source: any) => {
-                        return (
-                          <track
-                            kind="captions"
-                            src={`https://invidious.weblibre.org${source.url}`}
-                            srclang="en"
-                            label={source.label}
-                            default
-                          />
-                        );
-                      })} */}
                     </video>
                     <h1 class="text-xl font-bold my-3">{data.video.title}</h1>
                     <div class="flex my-3 gap-2 align-middle">
