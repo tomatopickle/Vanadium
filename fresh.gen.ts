@@ -9,7 +9,7 @@ import * as $2 from "./routes/api/cc.ts";
 import * as $3 from "./routes/api/joke.ts";
 import * as $4 from "./routes/index.tsx";
 import * as $5 from "./routes/search.tsx";
-import * as $6 from "./routes/video/[id].tsx";
+import * as $6 from "./routes/watch.tsx";
 import * as $$0 from "./islands/Comments.tsx";
 import * as $$1 from "./islands/Counter.tsx";
 import * as $$2 from "./islands/VideoUI.tsx";
@@ -24,7 +24,7 @@ const manifest = {
     "./routes/api/joke.ts": $3,
     "./routes/index.tsx": $4,
     "./routes/search.tsx": $5,
-    "./routes/video/[id].tsx": $6,
+    "./routes/watch.tsx": $6,
   },
   islands: {
     "./islands/Comments.tsx": $$0,

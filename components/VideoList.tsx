@@ -7,7 +7,7 @@ export default function videoCard(video: Video, inRecos) {
   return (
     video.videoId
       ? (
-        <a href={`/video/${video.videoId}`} key={video.videoId}>
+        <a href={`/watch?v=${video.videoId}`} key={video.videoId}>
           <div class="w-full dark:(hover:bg-gray-700 active:bg-gray-600) flex transition-all  hover:bg-gray-100 active:bg-gray-200 p-2 rounded-lg">
             <div class="relative mr-3 w-1/5 min-w-[12vw]">
               <img

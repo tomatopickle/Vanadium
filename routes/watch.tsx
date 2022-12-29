@@ -1,21 +1,23 @@
 // import { PageProps } from "$fresh/server.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
-import Body from "../../components/Body.tsx";
-import Header from "../../components/Header.tsx";
-import RecoTile from "../../components/RecoTile.tsx";
+import Body from "../components/Body.tsx";
+import Header from "../components/Header.tsx";
+import RecoTile from "../components/RecoTile.tsx";
 
-import Api from "../../lib/api.tsx";
-import ui from "../../ui/index.tsx";
-import formatNumber from "../../lib/formatNumber.ts";
+import Api from "../lib/api.tsx";
+import ui from "../ui/index.tsx";
+import formatNumber from "../lib/formatNumber.ts";
 import IconThumbUp from "https://deno.land/x/tabler_icons_tsx@0.0.2/tsx/thumb-up.tsx";
 import IconThumbDown from "https://deno.land/x/tabler_icons_tsx@0.0.2/tsx/thumb-down.tsx";
-import Comments from "../../islands/Comments.tsx";
+import Comments from "../islands/Comments.tsx";
 import Linkify from "https://esm.sh/react-linkify";
 
 export const handler: Handlers = {
   async GET(_, ctx) {
-    const videoId = ctx.params.id;
+  const url = new URL(_.url);
+
+    const videoId = url.searchParams.get('v') || '';
     const api = new Api("https://invidious.baczek.me/api/v1");
     const video = await api.getVideo(videoId);
     const author = await api.getAuthor(video.authorId);
@@ -175,7 +177,7 @@ export default function Page({ data }: PageProps) {
                 <h2 class="text-lg p-10 py-1  text-center">
                   {data.video.error}
                 </h2>
-                <a href="../">
+                <a href="">
                   <button class={ui.btnPrimary + " block m-auto"}>
                     Go Home
                   </button>
