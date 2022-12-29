@@ -134,10 +134,14 @@ export default function Page({ data }: PageProps) {
                     </div>
                     <br />
                     <h2 class="text-lg font-semibold">Comments</h2>
-                    <Comments
-                      comments={data.comments}
-                      videoId={data.video.videoId}
-                    />
+                    {data.comments
+                      ? (
+                        <Comments
+                          comments={data.comments}
+                          videoId={data.video.videoId}
+                        />
+                      )
+                      : <h4 class="text-center">No Comments Yet</h4>}
                     <br />
                   </div>
                   <div class="w-2/6">
