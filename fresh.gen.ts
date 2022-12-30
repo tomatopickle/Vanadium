@@ -7,14 +7,16 @@ import * as $0 from "./routes/[name].tsx";
 import * as $1 from "./routes/api/authorPfp/[authorId].tsx";
 import * as $2 from "./routes/api/cc.ts";
 import * as $3 from "./routes/api/joke.ts";
-import * as $4 from "./routes/index.tsx";
-import * as $5 from "./routes/search.tsx";
-import * as $6 from "./routes/watch.tsx";
+import * as $4 from "./routes/channel/[id].jsx";
+import * as $5 from "./routes/index.tsx";
+import * as $6 from "./routes/search.tsx";
+import * as $7 from "./routes/watch.tsx";
 import * as $$0 from "./islands/Comments.tsx";
 import * as $$1 from "./islands/Counter.tsx";
-import * as $$2 from "./islands/VideoUI.tsx";
-import * as $$3 from "./islands/Videos.tsx";
-import * as $$4 from "./islands/VideosList.tsx";
+import * as $$2 from "./islands/Tabs.jsx";
+import * as $$3 from "./islands/VideoUI.tsx";
+import * as $$4 from "./islands/Videos.tsx";
+import * as $$5 from "./islands/VideosList.tsx";
 
 const manifest = {
   routes: {
@@ -22,16 +24,18 @@ const manifest = {
     "./routes/api/authorPfp/[authorId].tsx": $1,
     "./routes/api/cc.ts": $2,
     "./routes/api/joke.ts": $3,
-    "./routes/index.tsx": $4,
-    "./routes/search.tsx": $5,
-    "./routes/watch.tsx": $6,
+    "./routes/channel/[id].jsx": $4,
+    "./routes/index.tsx": $5,
+    "./routes/search.tsx": $6,
+    "./routes/watch.tsx": $7,
   },
   islands: {
     "./islands/Comments.tsx": $$0,
     "./islands/Counter.tsx": $$1,
-    "./islands/VideoUI.tsx": $$2,
-    "./islands/Videos.tsx": $$3,
-    "./islands/VideosList.tsx": $$4,
+    "./islands/Tabs.jsx": $$2,
+    "./islands/VideoUI.tsx": $$3,
+    "./islands/Videos.tsx": $$4,
+    "./islands/VideosList.tsx": $$5,
   },
   baseUrl: import.meta.url,
   config,

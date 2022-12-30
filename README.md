@@ -1,11 +1,8 @@
-# fresh project
+# Vanadium
 
-### Usage
+![Vandium Logo](https://vanadium.deno.dev/logo.png)
 
-Start the project:
 
-```
-deno task start
-```
+![made with fresh](https://fresh.deno.dev/fresh-badge.svg)
 
-This will watch the project directory and restart as necessary.
+# A free Invidious web client

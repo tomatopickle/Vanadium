@@ -12,12 +12,13 @@ import IconThumbUp from "https://deno.land/x/tabler_icons_tsx@0.0.2/tsx/thumb-up
 import IconThumbDown from "https://deno.land/x/tabler_icons_tsx@0.0.2/tsx/thumb-down.tsx";
 import Comments from "../islands/Comments.tsx";
 import Linkify from "https://esm.sh/react-linkify";
+import Video from "../components/Video.jsx";
 
 export const handler: Handlers = {
   async GET(_, ctx) {
-  const url = new URL(_.url);
+    const url = new URL(_.url);
 
-    const videoId = url.searchParams.get('v') || '';
+    const videoId = url.searchParams.get("v") || "";
     const api = new Api("https://invidious.baczek.me/api/v1");
     const video = await api.getVideo(videoId);
     const author = await api.getAuthor(video.authorId);
@@ -65,34 +66,7 @@ export default function Page({ data }: PageProps) {
               <p class="my-6">
                 <div class="flex h-full gap-1">
                   <div class="w-2/3 h-4/5 h-screen">
-                    <video
-                      id="video"
-                      preload="auto"
-                      data-setup="{}"
-                      controls
-                      class="video-js  vjs-big-play-centered h-3/5 w-full"
-                    >
-                      {data.video.captions.map((source: any) => {
-                        return (
-                          <track
-                            kind="captions"
-                            src={`http://localhost:8000/api/cc?url=https://invidious.weblibre.org${source.url}`}
-                            srclang={source.language_code}
-                            label={source.label}
-                            default
-                          />
-                        );
-                      })}
-                      {data.video.formatStreams.map((source: any) => {
-                        return (
-                          <source
-                            label={source.qualityLabel}
-                            src={source.url}
-                            type={source.type}
-                          />
-                        );
-                      })}
-                    </video>
+                    <Video video={data.video} class="w-full" />
                     <h1 class="text-xl font-bold my-3">{data.video.title}</h1>
                     <div class="flex my-3 gap-2 align-middle">
                       {data.author.authorThumbnails
@@ -106,9 +80,14 @@ export default function Page({ data }: PageProps) {
                         )
                         : <div></div>}
                       <div class="block">
-                        <h2 class="font-semibold whitespace-nowrap">
-                          {data.author.author}
-                        </h2>
+                        <a
+                          href={`${data.video.authorUrl}`}
+                          class="active:opacity-70"
+                        >
+                          <h2 class="font-semibold whitespace-nowrap">
+                            {data.author.author}
+                          </h2>
+                        </a>
                         <small class="opacity-70 truncate">
                           {formatNumber(data.author.subCount)} subscribers
                         </small>
@@ -164,6 +143,13 @@ export default function Page({ data }: PageProps) {
                   .video-js .vjs-control:focus:before, .video-js .vjs-control:hover:before, .video-js .vjs-control:focus{
                     text-shadow:none;
                     opacity:0.7;
+                  }
+                  .vjs-big-play-centered .vjs-big-play-button{
+                    backdrop-filter: blur(10px);
+                    border: none;
+                  }
+                  .vjs-has-started .vjs-control-bar, .vjs-audio-only-mode .vjs-control-bar{
+                    backdrop-filter: blur(10px);
                   }
                 `}
                 </style>

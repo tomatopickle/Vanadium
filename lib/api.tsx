@@ -16,7 +16,7 @@ class Api {
     return data;
   }
   async getVideo(id: string) {
-    const res = await fetch(`${this.instanceUrl}/videos/${id}`);
+    const res = await fetch(`${this.instanceUrl}/videos/${id}?hl=en-US`);
     const data = res.json();
     return data;
   }

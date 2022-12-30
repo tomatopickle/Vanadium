@@ -4,10 +4,10 @@ import IconThumbUp from "https://deno.land/x/tabler_icons_tsx@0.0.2/tsx/thumb-up
 import IconThumbDown from "https://deno.land/x/tabler_icons_tsx@0.0.2/tsx/thumb-down.tsx";
 import IconChevronDown from "https://deno.land/x/tabler_icons_tsx@0.0.2/tsx/chevron-down.tsx";
 import IconChevronUp from "https://deno.land/x/tabler_icons_tsx@0.0.2/tsx/chevron-up.tsx";
-
+import formatNumber from "../lib/formatNumber.ts";
 import Api from "../lib/api.tsx";
-import { useState } from "preact/hooks";
 import { Component } from "preact";
+
 
 interface Props {
   comments: Array<any>;
@@ -53,7 +53,7 @@ export default class Comments
               <div class="flex pt-2 gap-2">
                 <div class="flex gap-1">
                   <IconThumbUp class="opacity-80" />
-                  <div class="opacity-70">{comment.likeCount}</div>
+                  <div class="opacity-70">{formatNumber(comment.likeCount)}</div>
                 </div>
                 <IconThumbDown class="opacity-80" />
               </div>
