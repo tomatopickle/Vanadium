@@ -1,7 +1,3 @@
-import { useState } from "preact/hooks";
-import ui from "../ui/index.tsx";
-import Api from "../lib/api.tsx";
-import formatNumber from "../lib/api.tsx";
 import videoCard from "../components/VideoCard.tsx";
 import { Component } from "preact";
 
@@ -87,7 +83,6 @@ export default class Videos extends Component<
     if (this.props == null) {
       return;
     }
-    const api = new Api("https://invidious.baczek.me/api/v1");
     const data = this.props.data;
     const el = data.map((e: Video) => {
       return videoCard(e);

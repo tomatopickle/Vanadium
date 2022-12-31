@@ -1,11 +1,14 @@
 import { Options } from "$fresh/plugins/twind.ts";
 import * as colors from "twind/colors";
-import { apply } from 'twind'
+import { apply } from "twind";
 
 export default {
   selfURL: import.meta.url,
   preflight: {
-    'p a': apply`text-blue-500 text-no-underline active:(opacity-80)`,
+    "p a": apply`text-blue-500 text-no-underline active:(opacity-80)`,
+    "button:focus": {
+      outline: "none !important",
+    },
   },
   theme: {
     colors: {

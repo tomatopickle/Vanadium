@@ -11,12 +11,13 @@ import * as $4 from "./routes/channel/[id].jsx";
 import * as $5 from "./routes/index.tsx";
 import * as $6 from "./routes/search.tsx";
 import * as $7 from "./routes/watch.tsx";
-import * as $$0 from "./islands/Comments.tsx";
-import * as $$1 from "./islands/Counter.tsx";
-import * as $$2 from "./islands/Tabs.jsx";
-import * as $$3 from "./islands/VideoUI.tsx";
-import * as $$4 from "./islands/Videos.tsx";
-import * as $$5 from "./islands/VideosList.tsx";
+import * as $$0 from "./islands/ChannelVideos.jsx";
+import * as $$1 from "./islands/Comments.tsx";
+import * as $$2 from "./islands/Counter.tsx";
+import * as $$3 from "./islands/Tabs.jsx";
+import * as $$4 from "./islands/VideoUI.tsx";
+import * as $$5 from "./islands/Videos.tsx";
+import * as $$6 from "./islands/VideosList.tsx";
 
 const manifest = {
   routes: {
@@ -30,12 +31,13 @@ const manifest = {
     "./routes/watch.tsx": $7,
   },
   islands: {
-    "./islands/Comments.tsx": $$0,
-    "./islands/Counter.tsx": $$1,
-    "./islands/Tabs.jsx": $$2,
-    "./islands/VideoUI.tsx": $$3,
-    "./islands/Videos.tsx": $$4,
-    "./islands/VideosList.tsx": $$5,
+    "./islands/ChannelVideos.jsx": $$0,
+    "./islands/Comments.tsx": $$1,
+    "./islands/Counter.tsx": $$2,
+    "./islands/Tabs.jsx": $$3,
+    "./islands/VideoUI.tsx": $$4,
+    "./islands/Videos.tsx": $$5,
+    "./islands/VideosList.tsx": $$6,
   },
   baseUrl: import.meta.url,
   config,

@@ -4,6 +4,7 @@ export default function Video(props) {
       id="video"
       preload="auto"
       data-setup="{}"
+      poster={props.video.videoThumbnails[0].url}
       controls
       class={"video-js  vjs-big-play-centered h-3/5 " + props.class}
     >

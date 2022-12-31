@@ -4,15 +4,21 @@ import formatNumber from "../lib/formatNumber.ts";
 
 export default function videoCard(video: Video) {
   return (
-    <a href={`/watch?v=${video.videoId}`} key={video.videoId} class='focus-visible:(border-blue-500 border-1) rounded-lg'>
+    <a
+      href={`/watch?v=${video.videoId}`}
+      key={video.videoId}
+      class="focus-visible:(border-blue-500 border-1) rounded-lg"
+    >
       <div class="max-w-sm dark:(hover:bg-gray-700 active:bg-gray-600) transition-all  hover:bg-gray-100 active:bg-gray-200 p-2 rounded-lg">
         <div class="relative">
-          <img
-            class="rounded-lg h-32 w-full object-cover"
-            loading="lazy"
-            src={video.videoThumbnails[4].url}
-            alt="Video Thumbnail"
-          />
+          {video.videoThumbnails && (
+            <img
+              class="rounded-lg h-32 w-full object-cover"
+              loading="lazy"
+              src={video.videoThumbnails[4].url}
+              alt="Video Thumbnail"
+            />
+          )}
           <div class="px-2 py-1 bg-black bg-opacity-60 w-min rounded-lg text-sm absolute bottom-1 right-2">
             {Number(video.lengthSeconds) == 0
               ? "LIVE"
@@ -32,7 +38,7 @@ export default function videoCard(video: Video) {
           <h5 class="text-base font-semibold tracking-tight ">
             {video.title}
           </h5>
-          <small class="opacity-70">{video.author}</small>
+          <a class="opacity-70 hover:text-blue-400" href={`./channel/${video.authorId}`}>{video.author}</a>
         </div>
       </div>
     </a>
