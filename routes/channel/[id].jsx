@@ -42,10 +42,10 @@ export default function Page({ data }) {
       <Head>
         <title>{data.author} | Vanadium</title>
       </Head>
-      <Header></Header>
+      <Header class="fixed top-0 left-0 right-0 bg-transparent" style='position:fixed;background:transparent;'></Header>
       <Body class="p-0 overflow-x-hidden">
         <div
-          class="w-full h-[9.6rem] bg-fixed bg-contain  flex justify-center items-center"
+          class="w-full h-52 bg-fixed bg-contain  flex justify-center items-center"
           style={`background-image:url(${data.authorBanners[0].url})`}
         >
         </div>
