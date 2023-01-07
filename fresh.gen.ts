@@ -10,7 +10,8 @@ import * as $3 from "./routes/api/joke.ts";
 import * as $4 from "./routes/channel/[id].jsx";
 import * as $5 from "./routes/index.tsx";
 import * as $6 from "./routes/search.tsx";
-import * as $7 from "./routes/watch.tsx";
+import * as $7 from "./routes/settings.jsx";
+import * as $8 from "./routes/watch.tsx";
 import * as $$0 from "./islands/ChannelVideos.jsx";
 import * as $$1 from "./islands/Comments.tsx";
 import * as $$2 from "./islands/Counter.tsx";
@@ -28,7 +29,8 @@ const manifest = {
     "./routes/channel/[id].jsx": $4,
     "./routes/index.tsx": $5,
     "./routes/search.tsx": $6,
-    "./routes/watch.tsx": $7,
+    "./routes/settings.jsx": $7,
+    "./routes/watch.tsx": $8,
   },
   islands: {
     "./islands/ChannelVideos.jsx": $$0,

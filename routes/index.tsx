@@ -7,10 +7,18 @@ import ui from "../ui/index.tsx";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { useState } from "preact/hooks";
 import SearchBar from "../components/SearchBar.tsx";
+import * as c from "https://deno.land/std@0.171.0/http/cookie.ts";
 
 export const handler: Handlers<Array<Video>> = {
   async GET(_, ctx) {
-    const api = new Api("https://invidious.baczek.me/api/v1");
+    const h = new Headers(_.headers);
+    const cookies = c.getCookies(h);
+    const url = (cookies["settings_instance_url"] &&
+      ("https://" + cookies["settings_instance_url"] + "/api/v1")) ||
+      "https://invidious.baczek.me/api/v1";
+    const api = new Api(
+      url,
+    );
     const data = await api.getPopular();
     return ctx.render(data);
   },
